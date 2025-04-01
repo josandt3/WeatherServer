@@ -34,7 +34,7 @@ The purpose of this exercise is to provide a sample of your work that we can dis
     `source venvdir/bin/activate`
 
 3. Install requirements
-    `pip install -r requirements.txt`
+    `pip3 install -r requirements.txt`
 
 
 # Running Server
@@ -47,13 +47,13 @@ The purpose of this exercise is to provide a sample of your work that we can dis
 
     `http://127.0.0.1:5000`
 
-3. Naviage to forecast page via the */forecast/{lattitude},{longitude} endpoint
+3. Navigate to forecast page via the ***/forecast/{latitude},{longitude}*** endpoint
 
     `http://127.0.0.1:5000/forecast/39.7456,-97.0892`
 
 # Running Tests
 
-1. From root directory
+1. Run pytest from the root of the WeatherServer directory
 
     `pytest tests`
 
