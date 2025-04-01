@@ -53,7 +53,7 @@ The purpose of this exercise is to provide a sample of your work that we can dis
 
 # Running Tests
 
-1. From root directory
+1. Run pytest from the root of the WeatherServer directory
 
     `pytest tests`
 
