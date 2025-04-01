@@ -24,11 +24,19 @@ def create_app():
     @app.route('/')
     def index():
         # index page
-        return "Welcome to the Weather Server! Use /forecast/[latitude],[longitude] to get weather forecast. For example: http://127.0.0.1:5000/forecast/39.7456,-97.0892", 200
+        return "Welcome to the Weather Server! Use /forecast/[latitude],[longitude] to get weather forecast. " \
+               "For example: http://127.0.0.1:5000/forecast/39.7456,-97.0892", 200
 
     @app.route('/forecast/<latitude>,<longitude>')
     def show_forecast(latitude, longitude):
-        # short forecast and temperature status for the given latitude and longitude
+        # Validate input
+        lat = float(latitude)
+        lon = float(longitude)
+        if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+            return f"Invalid coordinates for {latitude}, {longitude}. " \
+                "Latitude must be between -90 and 90, longitude between -180 and 180", 422
+        
+        # fetch short forecast and temperature status for the given latitude and longitude
         try:
             forecast_request = requests.get(FORECAST_LINK.format(latitude=latitude, longitude=longitude))
             if forecast_request.status_code != 200:

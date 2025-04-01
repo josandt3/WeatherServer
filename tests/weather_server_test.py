@@ -30,12 +30,21 @@ def test_invalid_forecast_request():
     Test the forecast request with invalid latitude and longitude.
     """
     client = create_app().test_client()
-    latitude = "123"
-    longitude = "456"
+    latitude = "-90"
+    longitude = "-90"
     forecast_link = f"forecast/{latitude},{longitude}"
     forecast_request = client.get(forecast_link)
     assert forecast_request.status_code == 500, f"Expected status code 500, but got {forecast_request.status_code}"
     assert "Unable to fetch weather data" in forecast_request.text, f"Expected error message not found in response: {forecast_request.text}"    
+    
+def test_invalid_input():
+    client = create_app().test_client()
+    latitude = "123"
+    longitude = "456"
+    forecast_link = f"forecast/{latitude},{longitude}"
+    forecast_request = client.get(forecast_link)
+    assert forecast_request.status_code == 422, f"Expected status code 422, but got {forecast_request.status_code}"
+    assert "Invalid coordinates" in forecast_request.text, f"Expected error message not found in response: {forecast_request.text}"
     
 def test_index_page():
     """
