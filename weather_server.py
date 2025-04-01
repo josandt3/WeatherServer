@@ -30,8 +30,11 @@ def create_app():
     @app.route('/forecast/<latitude>,<longitude>')
     def show_forecast(latitude, longitude):
         # Validate input
-        lat = float(latitude)
-        lon = float(longitude)
+        try:
+            lat = float(latitude)
+            lon = float(longitude)
+        except ValueError:
+            return f"Invalid coordinates for {latitude}, {longitude}. Coordinates must be numeric.", 422
         if not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
             return f"Invalid coordinates for {latitude}, {longitude}. " \
                 "Latitude must be between -90 and 90, longitude between -180 and 180", 422
